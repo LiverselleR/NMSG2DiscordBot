@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ namespace NMSG2DiscordBot
 
         public Racetrack()
         {
-            id = 0;
+            id = -1;
             this.width = 30;
             this.radius = 150;
             this.fieldType = FieldType.grass;
@@ -29,13 +30,14 @@ namespace NMSG2DiscordBot
 
             for(int i = 0; i < 5; i++)
             {
-                partLength.Add(1);
+                partLength.Add(500);
                 if (i % 2 == 0) partType.Add(CourseType.straight);
                 else partType.Add(CourseType.curve);
                 partHeight.Add(0);
             }
         }
 
+        [JsonConstructor]
         public Racetrack(int id, List<int> partLength, List<CourseType> partType, List<double> partHeight, int width, int radius, FieldType fieldType)
         {
             this.id = id;

@@ -12,6 +12,7 @@ namespace NMSG2DiscordBot
         public List<String> turnLog;
         public Turn turn;
 
+        [JsonConstructor]
         public Race(Derby derby, List<Participant> entry)
         {
             this.derby = derby;

@@ -103,7 +103,7 @@ namespace NMSG2DiscordBot
                 using (FileStream fs = File.Create(racetrackPath))
                 {
                     JArray dataset = new JArray();
-                    Racetrack r = new Racetrack(0, new List<int>(), new List<CourseType>(), new List<double>(), 30, 110, FieldType.durt);
+                    Racetrack r = new Racetrack();
                     dataset.Add(JObject.FromObject(r));
                     StreamWriter sw = new StreamWriter(fs);
                     sw.WriteLine(dataset.ToString());

@@ -45,6 +45,7 @@ namespace NMSG2DiscordBot
             // call ConfigureServices to create the ServiceCollection/Provider for passing around the services
             using (var services = ConfigureServices())
             {
+                JSONManager.Initialize();
                 // get the client and assign to client 
                 // you get the services via GetRequiredService<T>
                 var client = services.GetRequiredService<DiscordSocketClient>();

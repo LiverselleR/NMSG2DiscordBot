@@ -63,6 +63,8 @@ namespace NMSG2DiscordBot
         public double currSpeed;                        // 더비용 현재 속도
         public double currAccel;                       // 더비용 현재 가속도 
 
+
+        [JsonConstructor]
         public Participant(Umamusume u,
                            Derby d,
                            Racetrack r,

@@ -29,6 +29,7 @@ namespace NMSG2DiscordBot
 
         }
 
+        [JsonConstructor]
         public Derby(int id, String derbyName, int numberParticipants, StatusType statusType)
         {
             this.id = id;
