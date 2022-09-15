@@ -8,6 +8,7 @@ using System.IO;
 using Discord;
 using Discord.WebSocket;
 using Discord.Commands;
+using Newtonsoft.Json;
 
 namespace NMSG2DiscordBot
 {
@@ -81,7 +82,7 @@ namespace NMSG2DiscordBot
 
             Race r = new Race(test, entry);
             r.Proceed();
-            return r.turn.GetDetailLog();
+            return r.turn.GetLog();
         }
     
         public CoursePhase GetCoursePhase(double currPosition)
@@ -112,8 +113,6 @@ namespace NMSG2DiscordBot
         
             
     }
-
-    
 
     public enum CourseType
     {

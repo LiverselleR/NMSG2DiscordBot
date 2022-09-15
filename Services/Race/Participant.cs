@@ -4,6 +4,7 @@ using System.Windows;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Numerics;
+using Newtonsoft.Json;
 
 namespace NMSG2DiscordBot
 {
@@ -998,9 +999,9 @@ namespace NMSG2DiscordBot
         public override string ToString()
         {
             return (rank + 1).ToString().PadLeft(2) + " : " + name.PadLeft(15, ' ')
-                + " - targetSpeed : " + targetSpeed.ToString("F")
-                + " / defaultTarget : " + defaultTargetSpeed.ToString("F")
-                + " / spurtTarget : " + spurtTargetSpeed.ToString("F")
+                + " - targetSpeed(m/s) : " + targetSpeed.ToString("F")
+                + " / defaultTarget(m/s) : " + defaultTargetSpeed.ToString("F")
+                + " / spurtTarget(m/s) : " + spurtTargetSpeed.ToString("F")
                 + " / currPosition : " + currPosition.ToString("F")
                 + " / Stamina : " + (currStamina * 100 / maxStamina).ToString("F")
                 + "% / Phase : " + derby.GetCoursePhase(currPosition.X).ToString()
@@ -1008,14 +1009,17 @@ namespace NMSG2DiscordBot
                 + " / ForceInMove : " + forceInMove.ToString()
                 + " / isSpurt : " + isSpurt;
         }
-        public string ToInfoString()
+        public string ToSimpleString()
         {
             return rank.ToString().PadLeft(2) + " : " + name.PadLeft(15, ' ')
-                + " - " + currPosition.X.ToString("F") + "m / 남은 체력 : "
-                + ((currStamina / maxStamina) * 100).ToString("F") + "%";
+                + " - " + currPosition.X.ToString("F") + "m / 현재 속도 : "
+                + (currSpeed * 3.6).ToString("F2") + "km/h";
         }
 
-
+        public float GetLeftDistance()
+        {
+            return racetrack.GetTrackLength() - currPosition.X;
+        }
     }
 
     public enum PositionKeep

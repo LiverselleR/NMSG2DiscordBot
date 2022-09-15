@@ -69,23 +69,25 @@ namespace NMSG2DiscordBot.Modules
         [SlashCommand("더비", "더비 테스트")]
         public async Task DerbyTestAsync()
         {
+            await RespondAsync("테스트 더비 시작");
+
             List<String> derbyCast = Derby.TestDerby_Process();
 
             if (derbyCast.Count <= 0)
             {
-                await ReplyAsync("derbyCast is Empty. Test End.");
+                await RespondAsync("derbyCast is Empty. Test End.");
                 return;
             }
 
             await ReplyAsync(derbyCast.Last<String>());
 
-            /*
-   foreach(String str in derbyCast)
+
+            foreach (String str in derbyCast)
             {
-       await ReplyAsync(str);
-       await Task.Delay(2000);
+                await ReplyAsync(str);
+                await Task.Delay(2000);
             }
-   */
+
             await ReplyAsync("Test Derby Complete");
         }
     }

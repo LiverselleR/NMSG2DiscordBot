@@ -139,42 +139,42 @@ namespace NMSG2DiscordBot
             List<Umamusume> result = new List<Umamusume>();
 
             result.Add(
-                new Umamusume("파란 천둥 (도주)", 0, 150, 150, 150, 90, 90,
+                new Umamusume("시나몬 룰렛 (도주)", 0, 150, 150, 150, 90, 90,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.C,
                 Aptitude.C, Aptitude.D,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.D));
             result.Add(
-                new Umamusume("블랙갈릭 캐슬 (도주)", 0, 150, 150, 150, 90, 90,
+                new Umamusume("화이트 불렛 (도주)", 0, 150, 150, 150, 90, 90,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.C,
                 Aptitude.C, Aptitude.D,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.D));
             result.Add(
-                new Umamusume("호크 레드아이 (선행)", 0, 150, 150, 150, 90, 90,
+                new Umamusume("리코리스 블랙 (선행)", 0, 150, 150, 150, 90, 90,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.C,
                 Aptitude.C, Aptitude.D,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.D));
             result.Add(
-                new Umamusume("블루오션 씨걸 (선행)", 0, 150, 150, 150, 90, 90,
+                new Umamusume("이터널 메모리 (선행)", 0, 150, 150, 150, 90, 90,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.C,
                 Aptitude.C, Aptitude.D,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.D));
             result.Add(
-                new Umamusume("웨이브 서퍼 (선입)", 0, 150, 150, 150, 90, 90,
+                new Umamusume("래피드 스텝 (선입)", 0, 150, 150, 150, 90, 90,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.C,
                 Aptitude.C, Aptitude.D,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.D));
             result.Add(
-                new Umamusume("레인보우 서퍼 (선입)", 0, 150, 150, 150, 90, 90,
+                new Umamusume("베스트 포지션 (선입)", 0, 150, 150, 150, 90, 90,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.C,
                 Aptitude.C, Aptitude.D,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.D));
             result.Add(
-                new Umamusume("후유마츠리 (추입)", 0, 150, 150, 150, 90, 90,
+                new Umamusume("위키드 웨스트 (추입)", 0, 150, 150, 150, 90, 90,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.C,
                 Aptitude.C, Aptitude.D,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.D));
             result.Add(
-                new Umamusume("썬더 샤베트 (추입)", 0, 150, 150, 150, 90, 90,
+                new Umamusume("트리키 쇼타임 (추입)", 0, 150, 150, 150, 90, 90,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.C,
                 Aptitude.C, Aptitude.D,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.D));
