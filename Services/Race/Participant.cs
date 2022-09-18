@@ -1012,7 +1012,7 @@ namespace NMSG2DiscordBot
         public string ToSimpleString()
         {
             return rank.ToString().PadLeft(2) + " : " + name.PadLeft(15, ' ')
-                + " - " + currPosition.X.ToString("F") + "m / 현재 속도 : "
+                + " : " + currPosition.X.ToString("F2") + "m / 현재 속도 : "
                 + (currSpeed * 3.6).ToString("F2") + "km/h";
         }
 

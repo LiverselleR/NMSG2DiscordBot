@@ -42,9 +42,9 @@ namespace NMSG2DiscordBot
             StringBuilder sbInfo = new StringBuilder();
             StringBuilder sbDetail = new StringBuilder();
 
-            sbInfo.Append("◎Turn " + currTurn
-                + " ||| 선두 남은 거리 " + participants[0].GetLeftDistance()
-                + "m ||| 선두 구간 : " + participants[0].coursePhase.ToString() + " |||\n");
+            sbInfo.Append("**◎Turn " + currTurn
+                + " ■ 선두 남은 거리 " + participants[0].GetLeftDistance()
+                + "m / 선두 구간 : " + participants[0].coursePhase.ToString() + " **\n");
             sbDetail.Append("◎Turn " + currTurn + "\n");
             foreach(Participant p in participants)
             {

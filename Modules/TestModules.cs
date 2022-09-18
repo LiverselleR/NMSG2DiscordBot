@@ -79,7 +79,7 @@ namespace NMSG2DiscordBot.Modules
                 return;
             }
 
-            await ReplyAsync(derbyCast.Last<String>());
+            //await ReplyAsync(derbyCast.Last<String>());
 
 
             foreach (String str in derbyCast)
