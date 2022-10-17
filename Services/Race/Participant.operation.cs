@@ -93,8 +93,8 @@ namespace NMSG2DiscordBot
                 case RunningStyle.Front:
                     overtakeTypes[0] = OvertakeType.inside;
                     overtakeTypes[1] = OvertakeType.front;
-                    overtakeTypes[2] = OvertakeType.outside;
-                    overtakeTypes[3] = OvertakeType.inMove;
+                    overtakeTypes[2] = OvertakeType.inMove;
+                    overtakeTypes[3] = OvertakeType.outside;
                     overtakeTypes[4] = OvertakeType.outMove;
                     break;
                 case RunningStyle.FI:
@@ -102,30 +102,31 @@ namespace NMSG2DiscordBot
                     overtakeTypes[0] = OvertakeType.front;
                     overtakeTypes[1] = OvertakeType.inside;
                     overtakeTypes[2] = OvertakeType.outside;
-                    overtakeTypes[3] = OvertakeType.outMove;
-                    overtakeTypes[4] = OvertakeType.inMove;
+                    overtakeTypes[3] = OvertakeType.inMove;
+                    overtakeTypes[4] = OvertakeType.outMove;
                     break;
                 default:
                     break;
             }
            
             route.Add(-1);
-            while (x < endX - 1 && x > 0)
+            while (x < endX - 1 && x >= 0)
             {
                 route[routePointer]++;
                 
                 if (route[routePointer] > 4)
                 {
+                    break;
                     routePointer--;
                     if (routePointer < 0)
                     {
                         routePointer = 0;
                         route.Clear();
                         route.Add(-1);
-                        x--;
-                        continue;
+                        break;
                     }
-                    switch (overtakeTypes[route[routePointer]])
+                    OvertakeType currentOvertakeType = overtakeTypes[route[routePointer]];
+                    switch (currentOvertakeType)
                     {
                         case OvertakeType.inside:
                             x = x - 1;
@@ -153,6 +154,14 @@ namespace NMSG2DiscordBot
                 int plusX = x;
                 int plusY = y;
                 OvertakeType type = overtakeTypes[route[routePointer]];
+                if(routePointer > 0)
+                {
+                    OvertakeType previousOvertakeType = overtakeTypes[route[routePointer - 1]];
+                    if ((int) type + (int) previousOvertakeType == 7)
+                    {
+                        continue;
+                    }
+                }
                 List<(int, int)> checklist = new List<(int, int)>();
                 switch (type)
                 {
@@ -302,23 +311,10 @@ namespace NMSG2DiscordBot
             }
             if (spurtLength < expectedSpurtLength)
             {
-                switch(runningStyle)
-                {
-                    case RunningStyle.Runaway:
-                    case RunningStyle.Front:
-                        if (surroundCheck[1, eyesight[eyesightLevel].Item2 / 2 - 1] == 0)
-                            InsideMove();
-                        else
-                            NormalRun();
-                        break;
-                    case RunningStyle.FI:
-                    case RunningStyle.Stretch:
-                        if (surroundCheck[1, eyesight[eyesightLevel].Item2 / 2 - 1] == 0)
-                            InsideMove();
-                        else
-                            PaceUp();
-                        break;
-                }
+                if (surroundCheck[1, eyesight[eyesightLevel].Item2 / 2 - 1] == 0)
+                    InsideMove();
+                else
+                    PaceUp();
             }
             else
                 NormalRun();

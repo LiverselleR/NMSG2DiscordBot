@@ -82,6 +82,29 @@ namespace NMSG2DiscordBot
 
             Race r = new Race(test, entry);
             r.Proceed();
+            List<String> raceDetailLog = r.turn.GetDetailLog();
+
+            String path = AppDomain.CurrentDomain.BaseDirectory + @"/RaceLog";
+
+            DirectoryInfo dl = new DirectoryInfo(path);
+            if (dl.Exists == false) dl.Create();
+
+
+            String LogPath = path + @"/Log_TestDerby" + "_" + DateTime.Now.ToString("yyyyMMdd-HHmmss") + ".txt";
+
+            if (!File.Exists(LogPath))
+            {
+                using (FileStream fs = File.Create(LogPath))
+                {
+                    StreamWriter sw = new StreamWriter(fs);
+                    foreach(String raceDetailLogLine in raceDetailLog)
+                    {
+                        sw.WriteLine(raceDetailLogLine);
+                    }
+                    sw.Close();
+                }
+            }
+
             return r.turn.GetLog();
         }
     
@@ -106,7 +129,7 @@ namespace NMSG2DiscordBot
                     break;
             }
 
-            if (currIndex == 0) return CoursePhase.First;
+            if (currPosition < 400) return CoursePhase.First;
             else if (currIndex < racetrack.partLength.Count - 2) return CoursePhase.Middle;
             else return CoursePhase.Last;
         }

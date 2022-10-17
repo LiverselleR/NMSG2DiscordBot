@@ -120,7 +120,7 @@ namespace NMSG2DiscordBot
                 else teamTrainerName = trainerList.Find(t => t.ownerID == team.trainerOwnerID).name;
             }
 
-            StringBuilder sb = new StringBuilder("◎이름 - " + name + " ( 소속 팀 : " + teamName + " / 전담 트레이너 : " + teamTrainerName + " ) \n"
+            StringBuilder sb = new StringBuilder("◆이름 - " + name + " ( 소속 팀 : " + teamName + " / 전담 트레이너 : " + teamTrainerName + " ) \n"
                 + "■ 스테이터스 - 스피드 : " + speed + " / 스태미나 : " + stamina + " / 근력 : " + power + " / 근성 : " + toughness + " / 지능 : " + intelligence + "\n"
                 + "■ 각질적성 - 도주 : " + runawayAptitude.ToString() + " / 선행 : " + frontAptitude.ToString() + " / 선입 : " + fiAptitude.ToString() + " / 추입 : " + stretchAptitude.ToString() + "\n"
                 + "■ 마장적성 - 잔디 : " + grassAptitude.ToString() + " / 더트 : " + durtAptitude.ToString() + "\n"
@@ -186,57 +186,57 @@ namespace NMSG2DiscordBot
             List<Umamusume> result = new List<Umamusume>();
 
             result.Add(
-                new Umamusume("스타라이트 허니", 0, 270, 270, 270, 150, 150,
+                new Umamusume("시나몬 룰렛", 0, 100, 100, 100, 50, 50,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.C,
                 Aptitude.C, Aptitude.D,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.D));
             result.Add(
-                new Umamusume("다프네 더블", 0, 270, 270, 270, 150, 150,
+                new Umamusume("리코리스 블랙", 0, 100, 100, 100, 50, 50,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.C,
                 Aptitude.C, Aptitude.D,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.D));
             result.Add(
-                new Umamusume("시후 내추럴", 0, 270, 270, 270, 150, 150,
+                new Umamusume("래피드 스텝", 0, 100, 100, 100, 50, 50,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.C,
                 Aptitude.C, Aptitude.D,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.D));
             result.Add(
-                new Umamusume("블랙 모카 번", 0, 270, 270, 270, 150, 150,
+                new Umamusume("넘버 리프라이즈", 0, 100, 100, 100, 50, 50,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.C,
                 Aptitude.C, Aptitude.D,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.D));
             result.Add(
-                new Umamusume("섬머 아이스", 0, 270, 270, 270, 150, 150,
+                new Umamusume("위키드 웨스트", 0, 100, 100, 100, 50, 50,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.C,
                 Aptitude.C, Aptitude.D,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.D));
             result.Add(
-                new Umamusume("윈터 신기루", 0, 270, 270, 270, 150, 150,
+                new Umamusume("홀리데이 미라클", 0, 100, 100, 100, 50, 50,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.C,
                 Aptitude.C, Aptitude.D,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.D));
             result.Add(
-                new Umamusume("미드나잇 노크", 0, 270, 270, 270, 150, 150,
+                new Umamusume("화이트 불렛", 0, 100, 100, 100, 50, 50,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.C,
                 Aptitude.C, Aptitude.D,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.D));
             result.Add(
-                new Umamusume("화이트 이사벨라", 0, 270, 270, 270, 150, 150,
+                new Umamusume("이터널 메모리", 0, 100, 100, 100, 50, 50,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.C,
                 Aptitude.C, Aptitude.D,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.D));
             result.Add(
-                new Umamusume("레드 얼럿", 0, 270, 270, 270, 150, 150,
+                new Umamusume("베스트 포지션", 0, 100, 100, 100, 50, 50,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.C,
                 Aptitude.C, Aptitude.D,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.D));
             result.Add(
-                new Umamusume("로마노바 시니", 0, 270, 270, 270, 150, 150,
+                new Umamusume("퓨어 스피릿", 0, 100, 100, 100, 50, 50,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.C,
                 Aptitude.C, Aptitude.D,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.D));
             result.Add(
-                new Umamusume("바유시키 바유", 0, 270, 270, 270, 150, 150,
+                new Umamusume("트리키 쇼타임", 0, 100, 100, 100, 50, 50,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.C,
                 Aptitude.C, Aptitude.D,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.D));

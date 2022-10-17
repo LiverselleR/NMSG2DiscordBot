@@ -22,7 +22,6 @@ namespace NMSG2DiscordBot
 
             List<Racetrack> racetracks = JSONManager.GetRacetrackList();
             Racetrack racetrack = racetracks.Find(rt => rt.id == derby.id);
-            Console.WriteLine(racetrack.partLength.Count);
 
             turn = new Turn(entry, racetrack.partType);
         }

@@ -59,11 +59,11 @@ namespace NMSG2DiscordBot
 
         public int GetLastLength()
         {
-            return partLength[partLength.Count - 1] + partLength[partLength.Count - 2] + 50;
+            return partLength[partLength.Count - 1] + partLength[partLength.Count - 2];
         }
         public int GetLastCurve()
         {
-            return partLength[partLength.Count - 1] + partLength[partLength.Count - 2];
+            return partLength[partLength.Count - 2];
         }
         public int GetLastStraight()
         {

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.IO;
 using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace NMSG2DiscordBot
 { 
@@ -33,7 +34,7 @@ namespace NMSG2DiscordBot
                 if (u == null) throw new UserIDNotFoundException();
                 else
                 {
-                    tList.Add(new Training(ownerID, 3, DateTime.Now));
+                    tList.Add(new Training(ownerID));
                 }
             }
 
@@ -41,44 +42,126 @@ namespace NMSG2DiscordBot
             int ui = uList.FindIndex(u => u.ownerID == ownerID);
 
             TimeSpan timeSpan = DateTime.Now.Date - tList[ti].date.Date;
-            if (timeSpan.Days > 0)
-                tList[ti].leftTraining = 3;
-            if (tList[ti].leftTraining > 0)
+            if (timeSpan.Days == 0)
             {
-                tList[ti].leftTraining--;
-                switch (status)
-                {
-                    case StatusType.speed:
-                        uList[ui].speed += 40;
-                        uList[ui].power += 10;
-                        break;
-                    case StatusType.stamina:
-                        uList[ui].stamina += 40;
-                        uList[ui].toughness += 10;
-                        break;
-                    case StatusType.power:
-                        uList[ui].power += 40;
-                        uList[ui].stamina += 10;
-                        break;
-                    case StatusType.toughness:
-                        uList[ui].toughness += 40;
-                        uList[ui].speed += 5;
-                        uList[ui].power += 5;
-                        break;
-                    case StatusType.intelligence:
-                        uList[ui].intelligence += 40;
-                        uList[ui].speed += 10;
-                        break;
-                }
-                tList[ti].date = DateTime.Now.Date;
+                throw new NoLeftTrainingCountException();
             }
-            else throw new NoLeftTrainingCountException();
 
+            switch (status)
+            {
+                case StatusType.speed:
+                    {
+                        int SpeedIncrease = 12;
+                        int PowerIncrease = 5;
+                        if (DateTime.Now.Date.Subtract(new DateTime(2022, 10, 15)).Days == 0
+                            || DateTime.Now.Date.Subtract(new DateTime(2022, 10, 16)).Days == 0)
+                        {
+                            SpeedIncrease = 16;
+                            PowerIncrease = 7;
+                        }
+                        else if (tList[ti].SpeedTrainingCount >= 0)
+                        {
+                            SpeedIncrease = 12;
+                            PowerIncrease = 5;
+                        }
+                        uList[ui].speed += SpeedIncrease;
+                        uList[ui].power += PowerIncrease;
+                        tList[ti].SpeedTrainingCount++;
+                        break;
+                    }
+                case StatusType.stamina:
+                    {
+                        int StaminaIncrease = 10;
+                        int ToughnessIncrease = 4;
+                        if (DateTime.Now.Date.Subtract(new DateTime(2022, 10, 15)).Days == 0
+                            || DateTime.Now.Date.Subtract(new DateTime(2022, 10, 16)).Days == 0)
+                        {
+                            StaminaIncrease = 15;
+                            ToughnessIncrease = 6;
+                        }
+                        else if (tList[ti].SpeedTrainingCount >= 0)
+                        {
+                            StaminaIncrease = 10;
+                            ToughnessIncrease = 4;
+                        }
+                        uList[ui].stamina += StaminaIncrease;
+                        uList[ui].toughness += ToughnessIncrease;
+                        tList[ti].StaminaTrainingCount++;
+                        break;
+                    }
+                case StatusType.power:
+                    {
+                        int PowerIncrease = 9;
+                        int StaminaIncrease = 5;
+                        if (DateTime.Now.Date.Subtract(new DateTime(2022, 10, 15)).Days == 0
+                            || DateTime.Now.Date.Subtract(new DateTime(2022, 10, 16)).Days == 0)
+                        {
+                            PowerIncrease = 14;
+                            StaminaIncrease = 7;
+                        }
+                        else if (tList[ti].SpeedTrainingCount >= 0)
+                        {
+                            PowerIncrease = 9;
+                            StaminaIncrease = 5;
+                        }
+                        uList[ui].power += PowerIncrease;
+                        uList[ui].stamina += StaminaIncrease;
+                        tList[ti].PowerTrainingCount++;
+                        break;
+                    }
+                case StatusType.toughness:
+                    {
+                        int ToughnessIncrease = 9;
+                        int SpeedIncrease = 4;
+                        int PowerIncrease = 4;
+                        if (DateTime.Now.Date.Subtract(new DateTime(2022, 10, 15)).Days == 0
+                            || DateTime.Now.Date.Subtract(new DateTime(2022, 10, 16)).Days == 0)
+                        {
+                            ToughnessIncrease = 14;
+                            SpeedIncrease = 5;
+                            PowerIncrease = 5;
+                        }
+                        else if (tList[ti].SpeedTrainingCount >= 0)
+                        {
+                            ToughnessIncrease = 9;
+                            SpeedIncrease = 4;
+                            PowerIncrease = 4;
+                        }
+                        uList[ui].toughness += ToughnessIncrease;
+                        uList[ui].speed += SpeedIncrease;
+                        uList[ui].power += PowerIncrease;
+                        tList[ti].ToughnessTrainingCount++;
+                        break;
+                    }
+                case StatusType.intelligence:
+                    {
+                        int IntelligenceIncrease = 10;
+                        int SpeedIncrease = 2;
+
+                        if (DateTime.Now.Date.Subtract(new DateTime(2022, 10, 15)).Days == 0
+                            || DateTime.Now.Date.Subtract(new DateTime(2022, 10, 16)).Days == 0)
+                        {
+                            IntelligenceIncrease = 15;
+                            SpeedIncrease = 4;
+                        }
+                        else if (tList[ti].SpeedTrainingCount >= 0)
+                        {
+                            IntelligenceIncrease = 10;
+                            SpeedIncrease = 2;
+                        }
+                        uList[ui].intelligence += IntelligenceIncrease;
+                        uList[ui].speed += SpeedIncrease;
+                        tList[ti].IntelligenceTrainingCount++;
+                        break;
+                    }
+            }
+
+            tList[ti].date = DateTime.Now.Date;
             JSONManager.SetTrainingInfo(tList);
             JSONManager.SetUmamusumeList(uList);
         }
 
-        public static String GetLeftTraining(UInt64 ownerID)
+        public static String DidTraining(UInt64 ownerID)
         {
             List<Training> tList = JSONManager.GetTrainingInfo();
             List<Umamusume> uList = JSONManager.GetUmamusumeList();
@@ -91,7 +174,7 @@ namespace NMSG2DiscordBot
                 if (u == null) throw new UserIDNotFoundException();
                 else
                 {
-                    tList.Add(new Training(ownerID, 3, DateTime.Now));
+                    tList.Add(new Training(ownerID));
                 }
             }
 
@@ -100,9 +183,9 @@ namespace NMSG2DiscordBot
 
             TimeSpan timeSpan = DateTime.Now.Date - tList[ti].date.Date;
             if (timeSpan.Days > 0)
-                tList[ti].leftTraining = 3;
-
-            return "■ " + uList[ui].name + " 의 남은 훈련 횟수 : " + tList[ti].leftTraining;
+                return "■ 오늘의 트레이닝을 아직 진행하지 않았습니다.";
+            else
+                return "■ 오늘의 트레이닝을 이미 진행했습니다. 내일 트레이닝을 진행해 주세요.";
 
         }
 
@@ -129,21 +212,49 @@ namespace NMSG2DiscordBot
     public class Training
     {
         public UInt64 ownerID;
-        public int leftTraining;
         public DateTime date;
+
+        public int SpeedTrainingCount;
+        public int StaminaTrainingCount;
+        public int PowerTrainingCount;
+        public int ToughnessTrainingCount;
+        public int IntelligenceTrainingCount;
 
         public Training()
         {
             this.ownerID = 0;
-            this.leftTraining = 0;
-            this.date = DateTime.Now.Date;
+            this.date = DateTime.MinValue;
+
+            SpeedTrainingCount = 0;
+            StaminaTrainingCount = 0;
+            PowerTrainingCount = 0;
+            ToughnessTrainingCount = 0;
+            IntelligenceTrainingCount = 0;
         }
 
-        public Training(UInt64 ownerID, int leftTraining, DateTime date)
+        public Training(UInt64 ownerID)
         {
             this.ownerID = ownerID;
-            this.leftTraining = leftTraining;
+            this.date = DateTime.MinValue;
+
+            SpeedTrainingCount = 0;
+            StaminaTrainingCount = 0;
+            PowerTrainingCount = 0;
+            ToughnessTrainingCount = 0;
+            IntelligenceTrainingCount = 0;
+        }
+
+        [JsonConstructor]
+        public Training(UInt64 ownerID, DateTime date, int SpeedTrainingCount, int StaminaTrainingCount, int PowerTrainingCount, int ToughnessTrainingCount, int IntelligenceTrainingCount)
+        {
+            this.ownerID = ownerID;
             this.date = date;
+
+            this.SpeedTrainingCount = SpeedTrainingCount;
+            this.StaminaTrainingCount = StaminaTrainingCount;
+            this.PowerTrainingCount = PowerTrainingCount;
+            this.ToughnessTrainingCount = ToughnessTrainingCount;
+            this.IntelligenceTrainingCount = IntelligenceTrainingCount;
         }
     }
 

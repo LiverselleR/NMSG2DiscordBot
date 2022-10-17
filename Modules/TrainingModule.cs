@@ -10,7 +10,7 @@ using Discord.Interactions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace NMSG2DiscordBot
+namespace NMSG2DiscordBot.Modules
 {
     [Group("훈련", "우마무스메의 훈련 진행 커맨드")]
     public class TrainingModule : InteractionModuleBase<SocketInteractionContext>
@@ -20,7 +20,7 @@ namespace NMSG2DiscordBot
         {
             try
             {
-                string result = TrainingManager.GetLeftTraining(Context.User.Id);
+                string result = TrainingManager.DidTraining(Context.User.Id);
                 await RespondAsync(result);
             }
             catch (UserIDNotFoundException e)
@@ -56,6 +56,7 @@ namespace NMSG2DiscordBot
                         "< 지능이 상승합니다. 추가로 스피드가 소폭 상승합니다. >");
                     break;
                 default:
+                    await RespondAsync("정보를 확인할 스탯을 골라 주세요. ( 속도 / 체력 / 근력 / 근성 / 지능 )");
                     break;
             }
         }
@@ -63,7 +64,7 @@ namespace NMSG2DiscordBot
         [SlashCommand("진행", "우마무스메의 훈련을 진행합니다. 1일 1회 가능합니다.")]
         public async Task UmamusumeTrainingAsync(String stat = null)
         {
-            if ((Context.Channel as ITextChannel).CategoryId != 8)
+            if ((Context.Channel as ITextChannel).CategoryId != 0)
             {
                 await RespondAsync("오류 : 훈련은 훈련 시설( 체력단련실, 운동장, 연습용 트랙( 잔디, 더트), 도서관 ) 에서만 가능합니다.");
                 return;
@@ -76,7 +77,7 @@ namespace NMSG2DiscordBot
             }
             catch (NoLeftTrainingCountException e)
             {
-                await RespondAsync("오류 : 오늘의 훈련 가능 횟수를 모두 소진했습니다. 한국 시간 기준 자정에 초기화 됩니다.");
+                await RespondAsync("오류 : 오늘의 트레이닝을 이미 진행했습니다. 내일 트레이닝을 진행해 주세요. 오전 09:00 (한국 표준시, UTC+9) 에 초기화 됩니다.");
             }
             catch (UserIDNotFoundException e)
             {

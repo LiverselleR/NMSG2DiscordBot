@@ -19,11 +19,11 @@ namespace NMSG2DiscordBot.Modules
         public async Task UmamusumeRegisterAsync(String uName)
         {
 
-            //if (Context.Channel.Id != 8)
-            //{
-            //    await RespondAsync("오류 : 등록은 관리실에서 진행됩니다. 관리실로 와 주세요.");
-            //    return;
-            //}
+            if (Context.Channel.Id != 0)
+            {
+                await RespondAsync("오류 : 등록은 행정실에서 진행됩니다. 행정실로 와 주세요.");
+                return;
+            }
 
             List<Umamusume> uList = JSONManager.GetUmamusumeList();
             Console.WriteLine(uName);
@@ -52,11 +52,11 @@ namespace NMSG2DiscordBot.Modules
         [SlashCommand("트레이너", "트레이너 등록을 진행합니다.")]
         public async Task TrainerRegisterAsync(String tName)
         {
-            //if (Context.Channel.Id != 1)
-            //{
-            //    await RespondAsync("오류 : 등록은 관리실에서 진행됩니다. 관리실로 와 주세요.");
-            //    return;
-            //}
+            if (Context.Channel.Id != 0)
+            {
+                await RespondAsync("오류 : 등록은 행정실에서 진행됩니다. 행정실로 와 주세요.");
+                return;
+            }
             List<Trainer> tList = JSONManager.GetTrainerList();
             try
             {
@@ -82,11 +82,11 @@ namespace NMSG2DiscordBot.Modules
         [SlashCommand("팀", "팀 등록을 진행합니다.")]
         public async Task TeamRegister(String tName)
         {
-            //if (Context.Channel.Id != 8)
-            //{
-            //    await RespondAsync("오류 : 등록은 관리실에서 진행됩니다. 관리실로 와 주세요.");
-            //    return;
-            //}
+            if (Context.Channel.Id != 0)
+            {
+                await RespondAsync("오류 : 등록은 행정실에서 진행됩니다. 행정실로 와 주세요.");
+                return;
+            }
             List<Team> teamList = JSONManager.GetTeamList();
             List<Trainer> trainerList = JSONManager.GetTrainerList();
             List<Umamusume> uList = JSONManager.GetUmamusumeList();

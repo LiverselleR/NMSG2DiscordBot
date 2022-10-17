@@ -56,7 +56,7 @@ namespace NMSG2DiscordBot
             }
             
             
-            return "◎이름 - " + name + " ( 담당 팀 : " + teamName + " ) \n"
+            return "◆ 이름 - " + name + " ( 담당 팀 : " + teamName + " ) \n"
                 + "■ 담당 우마무스메 : " + sb.ToString();
         }
     }

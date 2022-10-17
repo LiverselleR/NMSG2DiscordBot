@@ -70,7 +70,8 @@ namespace NMSG2DiscordBot
                            Derby d,
                            Racetrack r,
                            RunningStyle runningStyle,
-                           float currPosition)
+                           float currPosition,
+                           bool isUser = false)
         {
             name = u.name;
             this.runningStyle = runningStyle;
@@ -94,6 +95,16 @@ namespace NMSG2DiscordBot
             calibratedPower = u.power + GetFieldTypeAptitudePowerValue();
             calibratedStamina = u.stamina;
             calibratedToughness = u.toughness;
+
+            // 유저 우마무스메 스토리모드 보정
+            if(isUser)
+            {
+                calibratedSpeed += 400;
+                calibratedIntelligence += 400;
+                calibratedPower += 400;
+                calibratedStamina += 400;
+                calibratedToughness += 400;
+            }
 
             lengthAptitudePowerValue = GetLengthAptitudePowerValue(u);
             lengthAptitudeSpeedValue = GetLengthAptitudeSpeedValue(u);
@@ -156,6 +167,10 @@ namespace NMSG2DiscordBot
 
         public void TurnProcess(List<Participant> pList, int currTurn)
         {
+            if(currTurn == 1000)
+            {
+                Console.WriteLine("{0} - 1000Turn", name);
+            }
             if (isGoal) return;
             TurnActionDecide(pList, currTurn);
             TurnActionActivate();
@@ -841,9 +856,9 @@ namespace NMSG2DiscordBot
             else return 1;
         }
 
+        // 주변 확인
         private void CheckNear(List<Participant> pList)
         {
-            surroundCheck = new int[eyesight[eyesightLevel].Item1, eyesight[eyesightLevel].Item2];
             SetEyesightLevel();
 
             int startX = 0;
@@ -855,14 +870,20 @@ namespace NMSG2DiscordBot
             {
                 for(int i = 0; i < endX; i++)
                 {
-                    surroundCheck[i, 0]++;
+                    for(int j = 0; j < startY; j++)
+                    {
+                        surroundCheck[i, j]++;
+                    }
                 }
             }
             else if(currPosition.Y >= racetrack.width - 0.5)
             {
                 for (int i = 0; i < endX; i++)
                 {
-                    surroundCheck[i, endY - 1]++;
+                    for(int j = startY + 1; j < endY; j++)
+                    {
+                        surroundCheck[i, j]++;
+                    }
                 }
             }
 
@@ -899,10 +920,8 @@ namespace NMSG2DiscordBot
 
         private void FirstPhaseActionDecide(List<Participant> pList)
         {
-            /*
             if (runningStyle == RunningStyle.Runaway)
             {
-                isSpurt = true;
                 SpeedUp();
             }
             else
@@ -910,25 +929,22 @@ namespace NMSG2DiscordBot
                 if (rank == 0)
                     NormalRun();
                 else if (pList[rank - 1].runningStyle == runningStyle)
-                    NormalRun();
+                    Overtake();
                 else
                 {
-                    switch(runningStyle)
+                    switch (runningStyle)
                     {
                         case RunningStyle.Front:
                             if (pList[rank - 1].runningStyle == RunningStyle.Runaway)
-                                PaceDown();
+                                NormalRun();
                             else
-                                PaceUp();
+                                Overtake();
                             break;
                         case RunningStyle.FI:
                             if (pList[rank - 1].runningStyle == RunningStyle.Stretch)
-                                PaceUp();
+                                Overtake();
                             else
-                                PaceDown();
-                            break;
-                        case RunningStyle.Stretch:
-                            PaceDown();
+                                NormalRun();
                             break;
                         default:
                             NormalRun();
@@ -936,19 +952,11 @@ namespace NMSG2DiscordBot
                     }
                 }
             }
-            */
-
-            NormalRun();
-
-            return;
         }
         private void MiddlePhaseActionDecide(List<Participant> pList)
         {
             isSpurt = false;
-
-            if (runningStyle == RunningStyle.Runaway)
-                NormalRun();
-            else if (rank == 0)
+            if (rank == 0)
                 PaceAdjust();
             else if (pList[rank - 1].runningStyle == runningStyle)
                 Overtake();
@@ -967,7 +975,7 @@ namespace NMSG2DiscordBot
                     spurtLength = racetrack.GetLastLength();
                     break;
                 case RunningStyle.FI:
-                    spurtLength = racetrack.GetLastCurve();
+                    spurtLength = racetrack.GetLastLength();
                     break;
                 case RunningStyle.Front:
                     spurtLength = racetrack.GetLastStraight();
@@ -977,8 +985,8 @@ namespace NMSG2DiscordBot
                     break;
             }
 
-            if (spurtLength < GetSpurtLength() 
-                && currPosition.X > racetrack.GetTrackLength() - spurtLength)
+            if (GetLeftDistance() < GetSpurtLength() 
+                || GetLeftDistance() < spurtLength)
                 isSpurt = true;
             if (currStamina <= 0)
                 isSpurt = false;
@@ -1008,6 +1016,16 @@ namespace NMSG2DiscordBot
                 + " / PositionKeep : " + positionKeep.ToString()
                 + " / ForceInMove : " + forceInMove.ToString()
                 + " / isSpurt : " + isSpurt;
+        }
+        public string ToCSVString()
+        {
+            return string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8}, {9}", targetSpeed, defaultTargetSpeed, spurtTargetSpeed,
+                currPosition.X, currPosition.Y, (float)currStamina * 100 / maxStamina, derby.GetCoursePhase(currPosition.X), positionKeep.ToString(),
+                forceInMove.ToString(), isSpurt);
+        }
+        static public string CVSFieldString()
+        {
+            return "turn, targetSpeed, defaultTargetSpeed, spurtTargetSpeed, currPosition.x, currPosition.Y, currStamina(%), coursePhase, positionKeep, forceInMove, isSpurt";
         }
         public string ToSimpleString()
         {

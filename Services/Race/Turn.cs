@@ -14,6 +14,7 @@ namespace NMSG2DiscordBot
         private List<CourseType> courseTypeList;
         private List<String> raceLog;
         private List<String> raceDetailLog;
+        private Dictionary<String, List<String>> participantsLogs;
         public Turn(List<Participant> participants, List<CourseType> courseTypeList)
         {
             currTurn = 0;
@@ -21,6 +22,16 @@ namespace NMSG2DiscordBot
             this.courseTypeList = courseTypeList;
             raceLog = new List<string>();
             raceDetailLog = new List<String>();
+            participantsLogs = new Dictionary<string, List<string>>();
+
+            foreach(Participant participant in participants)
+            {
+                participantsLogs.Add(participant.name, new List<String>());
+            }
+            foreach(KeyValuePair<String, List<String>> participantLogPair in participantsLogs)
+            {
+                participantLogPair.Value.Add(Participant.CVSFieldString());
+            }
         }
 
         public void Process()
@@ -53,6 +64,7 @@ namespace NMSG2DiscordBot
 
                 sbInfo.Replace('_', ' ');
                 sbDetail.Replace('_', ' ');
+                participantsLogs[p.name].Add(string.Format("{0}, {1}", currTurn, p.ToCSVString()));
             }
             if (currTurn%20 == 0)
             {
@@ -67,9 +79,15 @@ namespace NMSG2DiscordBot
         {
             return raceLog;
         }
+
         public List<String> GetDetailLog()
         {
             return raceDetailLog;
+        }
+
+        public Dictionary<string, List<string>> GetCSVLog()
+        {
+            return participantsLogs;
         }
 
         public List<RunningStyle> GetRunningStyles()
