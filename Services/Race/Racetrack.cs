@@ -99,12 +99,41 @@ namespace NMSG2DiscordBot
         {
             return radius * currSpeed / (radius - ((double)width / 2) + currY);
         }
+
+        public RacePhase GetCurrentRacePhase(double currentLocation)
+        {
+            double PoleLength = GetTrackLength() / 24;
+            if(currentLocation < PoleLength * 4)
+            {
+                return RacePhase.phase0;
+            }
+            else if(currentLocation < PoleLength * 16)
+            {
+                return RacePhase.phase1;
+            }
+            else if(currentLocation < PoleLength * 20 )
+            {
+                return RacePhase.phase2;
+            }
+            else
+            {
+                return RacePhase.phase3;
+            }
+        }
     }
 
     public enum FieldType
     {
         durt = 1,
         grass = 2
+    }
+
+    public enum RacePhase
+    {
+        phase0, // 초반, 01/24 ~ 04/24
+        phase1, // 중반, 05/24 ~ 16/24
+        phase2, // 종반, 17/24 ~ 20/24
+        phase3, // 라스트 스퍼트, 21/24 ~ 24/24
     }
 
 }
