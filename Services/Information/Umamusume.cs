@@ -186,57 +186,57 @@ namespace NMSG2DiscordBot
             List<Umamusume> result = new List<Umamusume>();
 
             result.Add(
-                new Umamusume("시나몬 룰렛", 0, 100, 100, 100, 50, 50,
+                new Umamusume("시나몬 룰렛", 0, 210, 160, 185, 70, 70,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.C,
                 Aptitude.C, Aptitude.D,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.D));
             result.Add(
-                new Umamusume("리코리스 블랙", 0, 100, 100, 100, 50, 50,
+                new Umamusume("리코리스 블랙", 0, 210, 160, 185, 70, 70,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.C,
                 Aptitude.C, Aptitude.D,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.D));
             result.Add(
-                new Umamusume("래피드 스텝", 0, 100, 100, 100, 50, 50,
+                new Umamusume("래피드 스텝", 0, 210, 160, 185, 70, 70,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.C,
                 Aptitude.C, Aptitude.D,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.D));
             result.Add(
-                new Umamusume("넘버 리프라이즈", 0, 100, 100, 100, 50, 50,
+                new Umamusume("넘버 리프라이즈", 0, 210, 160, 185, 70, 70,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.C,
                 Aptitude.C, Aptitude.D,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.D));
             result.Add(
-                new Umamusume("위키드 웨스트", 0, 100, 100, 100, 50, 50,
+                new Umamusume("위키드 웨스트", 0, 210, 160, 185, 70, 70,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.C,
                 Aptitude.C, Aptitude.D,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.D));
             result.Add(
-                new Umamusume("홀리데이 미라클", 0, 100, 100, 100, 50, 50,
+                new Umamusume("홀리데이 미라클", 0, 210, 160, 185, 70, 70,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.C,
                 Aptitude.C, Aptitude.D,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.D));
             result.Add(
-                new Umamusume("화이트 불렛", 0, 100, 100, 100, 50, 50,
+                new Umamusume("화이트 불렛", 0, 210, 160, 185, 70, 70,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.C,
                 Aptitude.C, Aptitude.D,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.D));
             result.Add(
-                new Umamusume("이터널 메모리", 0, 100, 100, 100, 50, 50,
+                new Umamusume("이터널 메모리", 0, 210, 160, 185, 70, 70,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.C,
                 Aptitude.C, Aptitude.D,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.D));
             result.Add(
-                new Umamusume("베스트 포지션", 0, 100, 100, 100, 50, 50,
+                new Umamusume("베스트 포지션", 0, 210, 160, 185, 70, 70,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.C,
                 Aptitude.C, Aptitude.D,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.D));
             result.Add(
-                new Umamusume("퓨어 스피릿", 0, 100, 100, 100, 50, 50,
+                new Umamusume("퓨어 스피릿", 0, 210, 160, 185, 70, 70,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.C,
                 Aptitude.C, Aptitude.D,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.D));
             result.Add(
-                new Umamusume("트리키 쇼타임", 0, 100, 100, 100, 50, 50,
+                new Umamusume("트리키 쇼타임", 0, 210, 160, 185, 70, 70,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.C,
                 Aptitude.C, Aptitude.D,
                 Aptitude.C, Aptitude.C, Aptitude.C, Aptitude.D));

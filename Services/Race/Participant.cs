@@ -97,14 +97,14 @@ namespace NMSG2DiscordBot
             calibratedToughness = u.toughness;
 
             // 유저 우마무스메 스토리모드 보정
-            if(isUser)
-            {
-                calibratedSpeed += 400;
-                calibratedIntelligence += 400;
-                calibratedPower += 400;
-                calibratedStamina += 400;
-                calibratedToughness += 400;
-            }
+            //if(isUser)
+            //{
+            //    calibratedSpeed += 400;
+            //    calibratedIntelligence += 400;
+            //    calibratedPower += 400;
+            //    calibratedStamina += 400;
+            //    calibratedToughness += 400;
+            //}
 
             lengthAptitudePowerValue = GetLengthAptitudePowerValue(u);
             lengthAptitudeSpeedValue = GetLengthAptitudeSpeedValue(u);
