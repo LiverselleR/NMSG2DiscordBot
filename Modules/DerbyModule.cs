@@ -42,10 +42,10 @@ namespace NMSG2DiscordBot
         }
 
         [SlashCommand("확인", "더비 참가 여부를 확인합니다. 더비에 참여했을 경우, 등록한 각질을 확인할 수 있습니다.")]
-        public async Task DerbyCheckAsync(String derbyName, String umamusumeName)
+        public async Task DerbyCheckAsync(String derbyName, String? umamusumeName = null)
         {
             ulong ownerID = 0;
-            if(umamusumeName.Equals(string.Empty))
+            if(umamusumeName == null)
             {
                 ownerID = Context.User.Id;
             }
