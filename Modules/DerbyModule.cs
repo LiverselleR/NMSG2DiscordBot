@@ -39,7 +39,74 @@ namespace NMSG2DiscordBot
             {
                 await RespondAsync("오류 : 각질 이름이 잘못되었습니다. 각질은 [도주 / 선행 / 선입 / 추입] 4종류 입니다.");
             }
+        }
 
+        [SlashCommand("확인", "더비 참가 여부를 확인합니다. 더비에 참여했을 경우, 등록한 각질을 확인할 수 있습니다.")]
+        public async Task DerbyCheckAsync(String derbyName, String umamusumeName)
+        {
+            ulong ownerID = 0;
+            if(umamusumeName.Equals(string.Empty))
+            {
+                ownerID = Context.User.Id;
+            }
+            else
+            {
+                List<Umamusume> uList = JSONManager.GetUmamusumeList();
+                Umamusume umamusume = uList.Find(u => u.name == umamusumeName);
+                if(umamusume != null)
+                {
+                    ownerID = umamusume.ownerID;
+                }
+                else
+                {
+                    await RespondAsync("오류 : 해당 이름의 우마무스메를 찾을 수 없습니다.");
+                    return;
+                }
+            }
+
+            try
+            {
+                RunningStyle? runningStyle = RaceEntryManager.Check(ownerID, derbyName);
+                if (runningStyle != null)
+                {
+                    switch (runningStyle)
+                    {
+                        case RunningStyle.Runaway:
+                            {
+                                await RespondAsync("레이스에 등록된 우마무스메입니다. 각질 : 도주");
+                                return;
+                            }
+                        case RunningStyle.Front:
+                            {
+                                await RespondAsync("레이스에 등록된 우마무스메입니다. 각질 : 선행");
+                                return;
+                            }
+                        case RunningStyle.FI:
+                            {
+                                await RespondAsync("레이스에 등록된 우마무스메입니다. 각질 : 선입");
+                                return;
+                            }
+                        case RunningStyle.Stretch:
+                            {
+                                await RespondAsync("레이스에 등록된 우마무스메입니다. 각질 : 추입");
+                                return;
+                            }
+                    }
+                }
+            }
+            catch (DiscordIDNotRegisteredException)
+            {
+                await RespondAsync("오류 : 우마무스메로 등록되지 않은 유저입니다.");
+            }
+            catch (DerbyNameNotFoundException)
+            {
+                await RespondAsync("오류 : 해당 더비를 찾을 수 없습니다. ");
+            }
+            catch (UmamusumeNotRegisteredException)
+            {
+                await RespondAsync("해당 레이스에 등록되지 않은 우마무스메 입니다.");
+            } 
+            
         }
 
         [SlashCommand("시작", "더비를 시작합니다. 관리자만 시작할 수 있습니다.")]

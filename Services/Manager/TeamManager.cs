@@ -95,5 +95,4 @@ namespace NMSG2DiscordBot
         {
         }
     }
-
 }

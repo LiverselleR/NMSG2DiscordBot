@@ -60,6 +60,43 @@ namespace NMSG2DiscordBot
 
             return;
         }
+
+        public static RunningStyle? Check(UInt64 ownerID, String derbyName)
+        {
+            List<Umamusume> uList = JSONManager.GetUmamusumeList();
+            List<Derby> dList = JSONManager.GetDerbyList();
+            List<Entry> eList = JSONManager.GetEntryList();
+
+            Umamusume u = uList.Find(u => u.ownerID == ownerID);
+            Derby d = dList.Find(d => d.derbyName == derbyName);
+            RunningStyle runningStyle;
+
+            if (u == null) throw new UmamusumeNameNotFoundException();
+            if (d == null) throw new DerbyNameNotFoundException();
+
+            int eIndex = eList.FindIndex(e => e.derbyID == d.id);
+            
+            Entry e;
+
+            if (eIndex == -1)
+            {
+                throw new UmamusumeNotRegisteredException();
+            }
+            else
+            {
+                e = eList[eIndex];
+                int Index = e.uList.FindIndex(temp => temp.ownerID == u.ownerID);
+                if (Index >= 0)
+                {
+                    runningStyle = e.rsList[Index];
+                    return runningStyle;
+                }
+                else
+                {
+                    throw new UmamusumeNotRegisteredException();
+                }
+            }
+        }
     }
 
     public class Entry
@@ -83,7 +120,6 @@ namespace NMSG2DiscordBot
         }
     }
 
-
     public class DerbyNameNotFoundException : Exception
     {
         public DerbyNameNotFoundException()
@@ -99,6 +135,24 @@ namespace NMSG2DiscordBot
         }
 
         protected DerbyNameNotFoundException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+        }
+    }
+    public class UmamusumeNotRegisteredException : Exception
+    {
+        public UmamusumeNotRegisteredException()
+        {
+        }
+
+        public UmamusumeNotRegisteredException(string message) : base(message)
+        {
+        }
+
+        public UmamusumeNotRegisteredException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+
+        protected UmamusumeNotRegisteredException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
     }
