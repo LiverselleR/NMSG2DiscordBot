@@ -94,7 +94,7 @@ namespace NMSG2DiscordBot
                     }
                 }
             }
-            catch (DiscordIDNotRegisteredException)
+            catch (UmamusumeNameNotFoundException)
             {
                 await RespondAsync("오류 : 우마무스메로 등록되지 않은 유저입니다.");
             }
@@ -105,8 +105,7 @@ namespace NMSG2DiscordBot
             catch (UmamusumeNotRegisteredException)
             {
                 await RespondAsync("해당 레이스에 등록되지 않은 우마무스메 입니다.");
-            } 
-            
+            }            
         }
 
         [SlashCommand("시작", "더비를 시작합니다. 관리자만 시작할 수 있습니다.")]
