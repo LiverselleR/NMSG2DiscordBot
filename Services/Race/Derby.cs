@@ -121,6 +121,8 @@ namespace NMSG2DiscordBot
             List<Racetrack> racetracks = JSONManager.GetRacetrackList();
             Racetrack racetrack = racetracks.Find(rt => rt.id == id);
 
+            int racetrackLength = racetrack.GetTrackLength();
+
             for (currIndex = 0; currIndex < racetrack.partLength.Count; currIndex++)
             {
                 prev = curr;
@@ -129,8 +131,8 @@ namespace NMSG2DiscordBot
                     break;
             }
 
-            if (currPosition < 400) return CoursePhase.First;
-            else if (currIndex < racetrack.partLength.Count - 2) return CoursePhase.Middle;
+            if (currPosition < racetrackLength / 6) return CoursePhase.First;
+            else if (currPosition < racetrackLength * 2 / 3) return CoursePhase.Middle;
             else return CoursePhase.Last;
         }
         

@@ -70,7 +70,6 @@ namespace NMSG2DiscordBot
             {
                 raceLog.Add(sbInfo.ToString());
                 raceDetailLog.Add(sbDetail.ToString());
-                Console.WriteLine(sbDetail.ToString());
             }
             return;
         }

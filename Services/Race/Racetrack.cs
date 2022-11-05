@@ -59,7 +59,7 @@ namespace NMSG2DiscordBot
 
         public int GetLastLength()
         {
-            return partLength[partLength.Count - 1] + partLength[partLength.Count - 2];
+            return GetTrackLength() / 3;
         }
         public int GetLastCurve()
         {
@@ -71,7 +71,7 @@ namespace NMSG2DiscordBot
         }
         public int GetLastSpurt()
         {
-            return partLength[partLength.Count - 1] / 2;
+            return GetTrackLength() / 6;
         }
         public int GetMiddleEndLength()
         {

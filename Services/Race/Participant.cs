@@ -569,7 +569,7 @@ namespace NMSG2DiscordBot
                 case RunningStyle.Stretch:
                     {
                         if (!isSpurt && coursePhase == CoursePhase.First) return 0.931;
-                        else return 1.000;
+                        else return 1.010;
                     }
                 default:
                     return 1.000;
@@ -920,9 +920,9 @@ namespace NMSG2DiscordBot
 
         private void FirstPhaseActionDecide(List<Participant> pList)
         {
-            if (runningStyle == RunningStyle.Runaway)
+            if (runningStyle == RunningStyle.Runaway )
             {
-                SpeedUp();
+                NormalRun();
             }
             else
             {
@@ -958,10 +958,8 @@ namespace NMSG2DiscordBot
             isSpurt = false;
             if (rank == 0)
                 PaceAdjust();
-            else if (pList[rank - 1].runningStyle == runningStyle)
+            else if (runningStyle == RunningStyle.Stretch || pList[rank - 1].runningStyle <= runningStyle)
                 Overtake();
-            else if (runningStyle == RunningStyle.Stretch)
-                PaceUp();
             else
                 PaceAdjust();
         }
